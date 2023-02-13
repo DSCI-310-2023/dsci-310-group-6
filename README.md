@@ -1,6 +1,11 @@
 # DSCI-310-Group-6
 
+Linda Trying to figure things out...
+
+
+
 ## Teamwork Contract
+
 
 ### 1. Expectations
 * Expecting everyone to show up to meetings on times (unless with excused absense), and to hand in work before appropriate deadlines
