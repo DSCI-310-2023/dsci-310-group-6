@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag JialuJin/dsci-310-group-6:latest
+      run: docker build . --file Dockerfile --tag jialujin/dsci-310-group-6:latest
     - name: Log in to Docker Hub
       uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
       with:
@@ -26,4 +26,4 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         
     - name: Docker push
-      run: docker push JialuJin/dsci-310-group-6:latest
+      run: docker push jialujin/dsci-310-group-6:latest
