@@ -1,6 +1,16 @@
 # DSCI-310-Group-6
 
-Linda Trying to figure things out...
+# Predict Airbnb nightly price
+Authors: Linda Huang, Davis Li, Jialu Jin
+
+## About
+The data we are using to compile this report and build our model is a "Bike Sharing Dataset" from UCI Machine Learning Repostory. The original data were pulled from http://capitalbikeshare.com/system-data.
+
+In this Data Analysis Report, we attempt to build a regression model using KNN algorithm. We will use ________ attributes from the datatset to predict the demand of bike during different hours, days of the week, and months. The resulting model will be able to help bike sharing business to better understand the demend of bike. 
+
+** TODO ** Add info on model error and describe the model more in detail later
+
+
 
 
 
