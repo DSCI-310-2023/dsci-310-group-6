@@ -2,7 +2,7 @@
 
 ## Our Pledge
 
-We believe in and promote diversity and inclusitivity in all aspects of our project contributor community. We strive to create a welcoming environment where everyone feels valued and respected, regardless of their background, culture, beliefs, or identity.
+We believe in and promote diversity and inclusivity in all aspects of our project contributor community. We strive to create a welcoming environment where everyone feels valued and respected, regardless of their background, culture, beliefs, or identity.
 
 
 ## Our Standards
