@@ -17,18 +17,18 @@ The analysis report can be found [here](analysis.ipynb).
 
 We use a Docker container image to make the computational environment for this project reproducible.
 
-To interactively run Jupyter lab inside the `jialujin/dsci-310-group-6` Docker container:
-
-- Type the following in terminal, after navigating to the root of this project repository
+To interactively run Jupyter lab inside the `jialujin/dsci-310-group-6` Docker container, type the following in terminal, after navigating to the root of this project repository
 
   ```
   docker run -it jialujin/dsci-310-group-6:latest
   docker run --rm -p 8787:8787 -e PASSWORD="apassword" rocker/rstudio:4.1.2
 
   ```
-- once the container has launched, users need to copy the URL to a web browser on your computer and type: `http://localhost:8787` into their web browser to access Jupyter Lab
-- Next, in Jupyter lab, navigate to, and open `analysis.ipynb` and click **Kernel** > **Restart and runall** to run the entire analysis.
-- when done working, type `docker rm ` to remove the dangling container.
+Once the container has launched, users need to copy the URL to a web browser on your computer and type: `http://localhost:8787` into their web browser to access.
+
+Next, open the `analysis.ipynb` and run the entire analysis.
+
+When done working, type `docker rm ` to remove the dangling container.
 
 ## Dependencies:
 
