@@ -19,8 +19,7 @@ We use a Docker container image to make the computational environment for this p
 
 To interactively run Jupyter lab inside the `jialujin/dsci-310-group-6` Docker container:
 
-- 
-- Type the following in terminal, after navigating to the root of this project repository:
+- Type the following in terminal, after navigating to the root of this project repository
 
   ```
   docker run -it jialujin/dsci-310-group-6:latest
