@@ -1,7 +1,0 @@
-services:
-  airbnb-env:
-    image: ubcdsci/predict-airbnb:v0.1.0
-    ports:
-      - "8888:8888"
-    volumes:
-      - .:/opt/notebooks/predict-airbnb-nightly-price
