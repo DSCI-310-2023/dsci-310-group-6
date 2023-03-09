@@ -7,11 +7,3 @@ WORKDIR /
 
 # Copy project files to container
 COPY . /
-
-<<<<<<< HEAD
-=======
-# Launch Jupyter Lab
-# CMD ["jupyter", "lab", "--ip=0.0.0.0", "--allow-root", "--NotebookApp.token=''"]
-
->>>>>>> cb5e20e9c59dc6c980389cc96c709eed5800c052
-
