@@ -27,8 +27,8 @@ We use a Docker container image to make the computational environment for this p
 To interactively run Jupyter lab inside the `jialujin/dsci-310-group-6` Docker container, type the following in terminal, after navigating to the root of this project repository:
 
   ```
+  docker pull jialujin/dsci-310-group-6
   docker run -it jialujin/dsci-310-group-6:latest
-  docker run --rm -p 8787:8787 -e PASSWORD="apassword" rocker/rstudio:4.1.2
 
   ```
 - Once the container has launched, users need to copy the URL to a web browser on your computer and type: `http://localhost:8787` into their web browser to access Jupyter Lab
