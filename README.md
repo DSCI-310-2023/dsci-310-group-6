@@ -15,27 +15,34 @@ The analysis report can be found [here](analysis.ipynb).
 
 ## Usage - How to interactively run and explore the project in Jupyter Lab
 
+First, clone this GitHub repository and open the terminal. In the terminal, navigate to the root folder of this project. 
+
+  ```
+  git clone https://github.com/JialuJin/dsci-310-group-6
+
+  ```
+
 We use a Docker container image to make the computational environment for this project reproducible.
 
-To interactively run Jupyter lab inside the `jialujin/dsci-310-group-6` Docker container, type the following in terminal, after navigating to the root of this project repository
+To interactively run Jupyter lab inside the `jialujin/dsci-310-group-6` Docker container, type the following in terminal, after navigating to the root of this project repository:
 
   ```
+  docker pull jialujin/dsci-310-group-6
   docker run -it jialujin/dsci-310-group-6:latest
-  docker run --rm -p 8787:8787 -e PASSWORD="apassword" rocker/rstudio:4.1.2
 
   ```
-Once the container has launched, users need to copy the URL to a web browser on your computer and type: `http://localhost:8787` into their web browser to access.
-
-Next, open the `analysis.ipynb` and run the entire analysis.
-
-When done working, type `docker rm ` to remove the dangling container.
+- Once the container has launched, users need to copy the URL to a web browser on your computer and type: `http://localhost:8787` into their web browser to access Jupyter Lab
+- Next, in Jupyter lab, navigate to, and open `analysis.ipynb` and click **Kernel** > **Restart and runall** to run the entire analysis.
+- when done working, type `docker rm ` to remove the dangling container.
 
 ## Dependencies:
 
-R version 4.1.1, Jupyter and R packages.
+R version 4.1.1, Jupyter and R packages listed in [environment.yml](environment.yml).
 
 ## License Information
 
-See [the license file](LICENSE.md) for more information. 
+The project is made available under the [Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/). The software provided in this project is offered under the [MIT open source license](https://opensource.org/license/mit/). 
+
+See [the license file](LICENSE.md) for more information.
 
 
