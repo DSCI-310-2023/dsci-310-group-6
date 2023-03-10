@@ -1,0 +1,198 @@
+---
+title: "Bike Share Analysis"
+output: html_document
+---
+
+# Predicting Count of Total Rental Bikes Using KNN Regression
+## "Authors: Cindy Jin, Linda Huang, Davis Li"
+
+```{r include = FALSE}
+library(tidyverse)
+library(ggplot2)
+library(readxl)
+library(digest)
+library(dplyr)
+library(repr)
+library(tidymodels)
+library(GGally)
+options(repr.matrix.max.rows = 10)
+
+set.seed(123)
+```
+
+
+### Summary
+We are going to build a regression model using the k-nearest neighbors algorithm. We will use three features: wind speed, normalized feeling temperature and season to predict the count of total rental bikes. This model could help the bike-sharing companies to better understand the distribution of the need for bikes and encourage people to support public transportation. Our current model has a prediction error, as measured by root mean squared error (RMSE), of about 1483. While we can improve the model given that the count of total rental bikes in our data set range from 22 to 8714, and the median count of total rental bikes is 4548, the model is still useful.
+
+The data we used to build our model contains all the daily counts of rental bikes between years 2011 and 2012 in Capital bikeshare system. The data was collected from https://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset.
+
+### Introduction
+Bike sharing is a top-rated service. When people need to commute short distances, they can rent a car directly from the bike-sharing system at any time without buying a bike so that they can travel conveniently. While users can either register to be premium customers, they can also rent bikes casually. However, for this particular service, the problem we should pay the most attention to is the supply of rental bikes. What if there is a high demand on a particular day but the rental bikes are out of supply? What if the bike-sharing company prepares too many bikes but there is a supply surplus? Therefore, our question is can we use some important factors to predict the number of count of total rental bikes including both casual and registered for a particular day?
+
+In an attempt to answer this question, we used a K-nearest neighbors regression model and data from daily counts of rental bikes between years 2011 and 2012 in Capital bikeshare system to build a regression model. We found that our regression model had a prediction error of about 1483. While we can improve the model given that the count of total rental bikes in our data set range from 22 to 8714, and the median count of total rental bikes is 4548, the model is still useful.
+
+# Methods
+### Data
+The data set used in this project has totally 16 columns, including the daily counts of rental bikes collected during 2011 and 2012 in Capital bikeshare system from https://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset. Based on the correlation of each factor with the daily counts of rental bikes, we chose to focus on 3 predictor variables(Table 1).
+
+Table 1. Predictor variables used for analysis, chosen based on their high correlation with the response variable.
+
+
+|Predictor variable|Description|
+|---|---|
+|season|season (1:winter, 2:spring, 3:summer, 4:fall)|
+|windspeed|Normalized wind speed. The values are divided to 67 (max)|
+|atemp|Normalized feeling temperature in Celsius. The values are derived via (t-t_min)/(t_max-t_min), t_min=-16, t_max=+50 (only in hourly scale)|
+
+
+The data set is already clean, with no missing values. So we only needed to remove the unused columns.
+
+### Analysis
+A training set with 80% of the data and a test set with 20% of the data were created from the dataset. We used the ggpairs() function to show the correlations between daily count and all other variables in the dataset in order to find factors that are highly correlated with daily count for predictive modelling. Only three predictor variables were included in our regression model, and we removed variables with low correlations. We developed a regression model for forecasting the daily number of rental bikes using the KNN algorithm. Prior to modelling, all predictor variables were weighted equally. Using 5-fold cross-validation and the root mean squared error (RMSE) as the regression model metric, we chose the hyperparameter K.
+
+Using the R programming language and the tidymodels and tidyverse R packages, we carried out the analysis. The code used for the analysis is available in this paper, which was created using Jupyter.    
+
+
+### Result
+
+``` {r}
+data <- read.csv("data/day.csv", header = T)|>     # read the data
+        select(-instant, -dteday, -yr, -holiday, -casual, -registered)   # unselect some useless columns
+head(data)
+
+```
+
+Finding the min and max range 
+
+```{r}
+
+# find the range and median of the daily count
+max <- max(data$cnt)
+min <- min(data$cnt)
+med <- median(data$cnt)
+max
+min
+med
+
+```
+
+Checking for missing values
+
+``` {r}
+colSums(is.na(data))
+```
+
+Find correlations between all factors with daily count
+
+```{r}
+options(repr.plot.width = 12, repr.plot.height = 12)    
+ggpairs(data)
+
+```
+
+Separate the data set into trainig set and test set
+
+```{r}
+training <- sample_n(data, nrow(data)*0.8, replace = FALSE)
+testing <- anti_join(data, training)
+```
+
+Select cnt as the target variable and windspeed&atemp&season as predictor variables, scale and center the predictor variables so that each variable is worth the same
+
+```{r}
+
+recipe <- recipe(cnt ~ windspeed+atemp+season, data = training) %>%    
+                step_scale(all_predictors()) %>%  
+                step_center(all_predictors()) 
+
+knn_spec <- nearest_neighbor(weight_func = "rectangular", neighbors = tune()) %>%  # tune the K value
+             set_engine("kknn") %>%    # use the K-nearest neighbors algorithm for our model 
+             set_mode("regression")    # use regression for our model   
+
+vfold <- vfold_cv(training, v = 5, strata = cnt)   # seperate the data into five random groups
+
+gridvals <- tibble(neighbors = seq(from = 1, to = 20))  #create the list of k values we are going to try
+
+# create a workflow
+wkflw <- workflow() %>%                              
+             add_recipe(recipe) %>%         # add the recipe into the workflow   
+             add_model(knn_spec)            # add the model into the workflow         
+
+results <- wkflw  %>%
+           tune_grid(resamples = vfold, grid = gridvals)%>%
+           collect_metrics() %>%          
+           filter(.metric == "rmse")%>%      # filter out only the rows with RMSE metric 
+           arrange(mean)                     # arrange the rows in ascending order of RMSE
+
+head(results, 5)
+
+kmin <- results %>%           # find the k value with lowest RMSE
+        slice(1) %>%          # slice the first row of the dataframe to get the row with the lowest RMSE
+        pull(neighbors)       # pulls the number of neighbors in the neighbors column
+
+```
+
+Table 2. Top 5 K values that gives the model the lowest RMSE
+
+```{r}
+
+options(repr.plot.width = 8, repr.plot.height = 8)             # set plot width and height    
+accuracy_vs_k <- ggplot(results, aes(x = neighbors, y = mean)) +     # plot K vs RMSE 
+                 geom_point() + geom_line() +                        # specify that each point in the graph will be connected by lines
+                 labs(x = "Neighbors", y = "Mean RMSE") +    
+                 scale_x_continuous(breaks = seq(0, 20, by = 1)) +   
+                 ggtitle("K Neighbours vs RMSE") +                   # give the graph a title
+                 theme(axis.title.x = element_text(size = 15),       
+                       axis.text.x = element_text(size = 15),
+                       axis.text.y = element_text(size = 15),
+                       axis.title.y = element_text(size = 15),
+                       plot.title = element_text(size = 20, hjust = 0.5))
+
+accuracy_vs_k
+
+```
+
+Figure 2. Line graph showing the relationship between the number of neighbours and the model's RMSE. 
+
+```{r}
+
+# plug in the best k value that we found above
+knn_spec_2 <- nearest_neighbor(weight_func = "rectangular", neighbors = kmin) %>%      
+              set_engine("kknn") %>%      
+              set_mode("regression")
+
+knn_fit <- workflow() %>%      
+           add_recipe(recipe) %>%         # add the same recipe above    
+           add_model(knn_spec_2) %>%      # add the new model with the best k-value that we found
+           fit(data = training)           # fit the training data
+
+predictions <- knn_fit %>%                # fit the workflow  
+               predict(testing) %>%       # predict the daily count for each observation in the test set
+               bind_cols(testing)         # put the column with all the predictions into the test data frame
+
+# find the predicted RMSE
+summary <- predictions %>%
+           metrics(truth = cnt, estimate = .pred) %>%   
+           filter(.metric == "rmse")%>%                       
+           select(.estimate)                                     
+summary
+
+```
+
+Table 3. predicted RMSE
+
+```{r}
+
+
+```
+
+### Discussion
+We found that the predicted RMSE for our model was similar to the cross-validated RMSE. Our model has an RMSE of about 1483 and it provides bike-sharing companies with an estimate of how many rental bikes they should prepare for a particular day under certain weather conditions. But if we can have more data and explore the data deeper, we might be able to further improve our model. 
+
+# References
+[1] https://www.sciencedirect.com/science/article/pii/S1877050919302364
+<br>[2] https://www.sciencedirect.com/science/article/pii/S2352146521001095
+<br>[3] https://www.atlantis-press.com/article/125947044.pdf
+<br>[4]https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DWkgKYjrNLwg&psig=AOvVaw2WXnvd_Ex_hbvoNQA7CcA8&ust=1671434938580000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCOCGj8DSgvwCFQAAAAAdAAAAABAE
+<br>[5] https://www.tunneltime.io/en/seoul-korea/seoul-bike
+
