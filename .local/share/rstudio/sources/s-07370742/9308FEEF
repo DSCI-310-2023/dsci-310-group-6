@@ -1,0 +1,29 @@
+{
+    "id": "9308FEEF",
+    "path": "~/bike_share_analysis.Rmd",
+    "project_path": null,
+    "type": "r_markdown",
+    "hash": "1963703484",
+    "contents": "",
+    "dirty": false,
+    "created": 1678483778923.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "17,0",
+        "scrollLine": "5",
+        "docOutlineVisible": "0",
+        "docOutlineSize": "63",
+        "rmdVisualCollapsedChunks": ""
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1678486704,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1678486704536,
+    "read_only": false,
+    "read_only_alternatives": []
+}
