@@ -1,4 +1,5 @@
 library(testthat)
+source("../../src/summary_data.R")
 
 # Example dataset
 my_data <- data.frame(x = c(1, 2, 3, 4, 5),
