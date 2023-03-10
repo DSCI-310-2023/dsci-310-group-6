@@ -1,5 +1,14 @@
+# Author: Linda Huang
+# Date: 2023-03-10
 
-library(testthat)
+"This script take one dataframe and one column name to produce the mean, max, min of the column 
+
+Usage: summary_dats.R --dataframe=<data> --cols=<cols>
+
+Options:
+--dataframe=<data>   The data frame
+--cols=<cols>        Comma-separated list of columns to calculate for mean, max, min value
+"
 
 
 get_max <- function(data, column_name) {
