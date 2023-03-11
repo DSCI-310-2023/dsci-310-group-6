@@ -84,8 +84,8 @@ colSums(is.na(data))
 Find correlations between all factors with daily count
 
 ```{r}
-options(repr.plot.width = 12, repr.plot.height = 12)    
-ggpairs(data)
+source("../src/create_pairplot.R")
+create_pairplot(data, plot_title = "Pairplot of Bike Share Data Attributes")
 
 ```
 
