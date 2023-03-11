@@ -55,10 +55,10 @@ Using the R programming language and the tidymodels and tidyverse R packages, we
 ### Result
 
 ``` {r}
-data <- read.csv("../data/day.csv", header = T)|>     # read the data
-        select(-instant, -dteday, -yr, -holiday, -casual, -registered)   # unselect some useless columns
-head(data)
-
+data_path = "../data/day.csv"
+source("../src/read_data.R")
+data <- read_data(data_path,c("instant", "dteday", "yr", "holiday", "casual", "registered"))     # read the data and unselect some useless columns
+head(data)         # print first few rows of the dataframe
 ```
 
 Finding the min and max range 
@@ -92,8 +92,9 @@ ggpairs(data)
 Separate the data set into trainig set and test set
 
 ```{r}
-training <- sample_n(data, nrow(data)*0.8, replace = FALSE)
-testing <- anti_join(data, training)
+source("../src/split_data.R")
+training <- split_data(data, 0.8, "train")
+testing <- split_data(data, 0.8, "test")
 ```
 
 Select cnt as the target variable and windspeed&atemp&season as predictor variables, scale and center the predictor variables so that each variable is worth the same
@@ -130,6 +131,7 @@ kmin <- results %>%           # find the k value with lowest RMSE
 
 Separate the data set into trainig set and test set
 ```{r}
+
 training <- sample_n(data, nrow(data)*0.8, replace = FALSE)
 testing <- anti_join(data, training)
 ```
