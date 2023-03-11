@@ -3,12 +3,7 @@
 
 "This script splits the data into training and testing sets.
 
-Usage: split_data.R --file_path=<file_path> --cols=<cols>
-
-Options:
---data=<data>                   Dataframe
---prop=<prop>                   A number specifing the proportion of data to be traing set
---train_test=<train_test>       Specifies which set do we want to return
+Usage: split_data.R
 "
 
 library(dplyr)

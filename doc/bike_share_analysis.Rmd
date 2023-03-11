@@ -7,13 +7,10 @@ output: html_document
 ## "Authors: Cindy Jin, Linda Huang, Davis Li"
 
 ```{r include = FALSE}
-install.packages("kknn")
 library(kknn)
 library(tidyverse)
-library(ggplot2)
 library(readxl)
 library(digest)
-library(dplyr)
 library(repr)
 library(tidymodels)
 library(GGally)

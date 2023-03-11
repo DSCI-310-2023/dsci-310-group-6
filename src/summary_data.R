@@ -3,11 +3,7 @@
 
 "This script take one dataframe and one column name to produce the mean, max, min of the column 
 
-Usage: summary_dats.R --dataframe=<data> --cols=<cols>
-
-Options:
---dataframe=<data>   The data frame
---cols=<cols>        Comma-separated list of columns to calculate for mean, max, min value
+Usage: summary_dats.R
 "
 
 

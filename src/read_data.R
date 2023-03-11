@@ -3,11 +3,7 @@
 
 "This script reads a CSV file from a specified directory, sets the header to true, and unselects specified columns.
 
-Usage: read_data.R --file_path=<file_path> --cols=<cols>
-
-Options:
---file_path=<file_path>   Path to the data file
---cols=<cols>             Comma-separated list of columns to exclude from the data frame
+Usage: read_data.R
 "
 
 library(tidyverse)
