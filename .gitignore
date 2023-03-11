@@ -52,3 +52,7 @@ rsconnect/
 .DS_Store
 .ipynb_checkpoints/
 data/.ipynb_checkpoints/
+
+
+.config/
+.local/
