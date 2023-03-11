@@ -20,17 +20,17 @@ set.seed(123)
 ```
 
 
-### Summary
+## Summary
 We are going to build a regression model using the k-nearest neighbors algorithm. We will use three features: wind speed, normalized feeling temperature and season to predict the count of total rental bikes. This model could help the bike-sharing companies to better understand the distribution of the need for bikes and encourage people to support public transportation. Our current model has a prediction error, as measured by root mean squared error (RMSE), of about 1483. While we can improve the model given that the count of total rental bikes in our data set range from 22 to 8714, and the median count of total rental bikes is 4548, the model is still useful.
 
 The data we used to build our model contains all the daily counts of rental bikes between years 2011 and 2012 in Capital bikeshare system. The data was collected from https://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset.
 
-### Introduction
+## Introduction
 Bike sharing is a top-rated service. When people need to commute short distances, they can rent a car directly from the bike-sharing system at any time without buying a bike so that they can travel conveniently. While users can either register to be premium customers, they can also rent bikes casually. However, for this particular service, the problem we should pay the most attention to is the supply of rental bikes. What if there is a high demand on a particular day but the rental bikes are out of supply? What if the bike-sharing company prepares too many bikes but there is a supply surplus? Therefore, our question is can we use some important factors to predict the number of count of total rental bikes including both casual and registered for a particular day?
 
 In an attempt to answer this question, we used a K-nearest neighbors regression model and data from daily counts of rental bikes between years 2011 and 2012 in Capital bikeshare system to build a regression model. We found that our regression model had a prediction error of about 1483. While we can improve the model given that the count of total rental bikes in our data set range from 22 to 8714, and the median count of total rental bikes is 4548, the model is still useful.
 
-# Methods
+## Methods
 ### Data
 The data set used in this project has totally 16 columns, including the daily counts of rental bikes collected during 2011 and 2012 in Capital bikeshare system from https://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset. Based on the correlation of each factor with the daily counts of rental bikes, we chose to focus on 3 predictor variables(Table 1).
 
@@ -55,7 +55,7 @@ Using the R programming language and the tidymodels and tidyverse R packages, we
 ### Result
 
 ``` {r}
-data <- read.csv("data/day.csv", header = T)|>     # read the data
+data <- read.csv("../data/day.csv", header = T)|>     # read the data
         select(-instant, -dteday, -yr, -holiday, -casual, -registered)   # unselect some useless columns
 head(data)
 
@@ -207,10 +207,10 @@ summary <- predictions %>%
 summary
 ```
 
-### Discussion
+## Discussion
 We found that the predicted RMSE for our model was similar to the cross-validated RMSE. Our model has an RMSE of about 1483 and it provides bike-sharing companies with an estimate of how many rental bikes they should prepare for a particular day under certain weather conditions. But if we can have more data and explore the data deeper, we might be able to further improve our model.
 
-### References
+## References
 [1] https://www.sciencedirect.com/science/article/pii/S1877050919302364
 [2] https://www.sciencedirect.com/science/article/pii/S2352146521001095
 [3] https://www.atlantis-press.com/article/125947044.pdf
