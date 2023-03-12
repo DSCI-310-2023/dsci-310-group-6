@@ -64,14 +64,15 @@ head(data)         # print first few rows of the dataframe
 Finding the min and max range 
 
 ```{r}
-
+source("../src/summary_data.R")
 # find the range and median of the daily count
-max <- max(data$cnt)
-min <- min(data$cnt)
-med <- median(data$cnt)
+max <- get_max(data, "cnt")
+min <- get_min(data, "cnt")
+med <- get_med(data, "cnt")
 max
 min
 med
+
 
 ```
 
