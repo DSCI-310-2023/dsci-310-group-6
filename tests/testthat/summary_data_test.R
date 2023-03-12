@@ -1,10 +1,12 @@
 library(testthat)
 source("../../src/summary_data.R")
 
+# Reading data frame to help testing
+file_path <- "summary_data_helper.csv"
+
+
 # Example dataset
-my_data <- data.frame(x = c(1, 2, 3, 4, 5),
-                      y = c(10, 20, 30, 40, 50),
-                      z = c(100, 200, 300, 400, 500))
+my_data <- read.csv(file_path, sep=',', header = TRUE)
 
 test_that("`summary_data` should return 50", {
   expect_equal(get_max(my_data, "y"), 50)
