@@ -73,6 +73,7 @@ max
 min
 med
 
+
 ```
 
 Checking for missing values
