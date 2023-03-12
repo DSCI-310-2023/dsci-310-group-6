@@ -43,8 +43,8 @@ R version 4.1.1 with R packages:
     r-testthat=3.1.6 \
     r-repr=1.1.4 \
     r-readxl=1.4.1 \
-    r-digest=0.6.31\
-    r-kknn=1.3.1 \
+    r-digest=0.6.31 \
+    r-kknn=1.3.1 
 
 ## License Information
 
