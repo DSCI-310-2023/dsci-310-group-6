@@ -92,83 +92,20 @@ create_pairplot(data, plot_title = "Pairplot of Bike Share Data Attributes")
 
 Separate the data set into trainig set and test set
 
-```{r}
+```{r, warning = FALSE}
 source("../src/split_data.R")
 training <- split_data(data, 0.8, "train")
 testing <- split_data(data, 0.8, "test")
 ```
 
-Select cnt as the target variable and windspeed&atemp&season as predictor variables, scale and center the predictor variables so that each variable is worth the same
-```{r}
-recipe <- recipe(cnt ~ windspeed+atemp+season, data = training) %>%    
-                step_scale(all_predictors()) %>%  
-                step_center(all_predictors()) 
-
-knn_spec <- nearest_neighbor(weight_func = "rectangular", neighbors = tune()) %>%  # tune the K value
-             set_engine("kknn") %>%    # use the K-nearest neighbors algorithm for our model 
-             set_mode("regression")    # use regression for our model   
-
-vfold <- vfold_cv(training, v = 5, strata = cnt)   # seperate the data into five random groups
-
-gridvals <- tibble(neighbors = seq(from = 1, to = 20))  #create the list of k values we are going to try
-
-# create a workflow
-wkflw <- workflow() %>%                              
-             add_recipe(recipe) %>%         # add the recipe into the workflow   
-             add_model(knn_spec)            # add the model into the workflow         
-
-results <- wkflw  %>%
-           tune_grid(resamples = vfold, grid = gridvals)%>%
-           collect_metrics() %>%          
-           filter(.metric == "rmse")%>%      # filter out only the rows with RMSE metric 
-           arrange(mean)                     # arrange the rows in ascending order of RMSE
-
-head(results, 5)
-
-kmin <- results %>%           # find the k value with lowest RMSE
-        slice(1) %>%          # slice the first row of the dataframe to get the row with the lowest RMSE
-        pull(neighbors)       # pulls the number of neighbors in the neighbors column
-```
-
-Separate the data set into trainig set and test set
-```{r}
-
-training <- sample_n(data, nrow(data)*0.8, replace = FALSE)
-testing <- anti_join(data, training)
-```
-
-
 - select cnt as the target variable and windspeed&atemp&season as predictor variables,
 - scale and center the predictor variables so that each variable is worth the same
 ```{r}
-recipe <- recipe(cnt ~ windspeed+atemp+season, data = training) %>%    
-                step_scale(all_predictors()) %>%  
-                step_center(all_predictors()) 
-
-knn_spec <- nearest_neighbor(weight_func = "rectangular", neighbors = tune()) %>%  # tune the K value
-             set_engine("kknn") %>%    # use the K-nearest neighbors algorithm for our model 
-             set_mode("regression")    # use regression for our model   
-
-vfold <- vfold_cv(training, v = 5, strata = cnt)   # seperate the data into five random groups
-
-gridvals <- tibble(neighbors = seq(from = 1, to = 20))  #create the list of k values we are going to try
-
-# create a workflow
-wkflw <- workflow() %>%                              
-             add_recipe(recipe) %>%         # add the recipe into the workflow   
-             add_model(knn_spec)            # add the model into the workflow         
-
-results <- wkflw  %>%
-           tune_grid(resamples = vfold, grid = gridvals)%>%
-           collect_metrics() %>%          
-           filter(.metric == "rmse")%>%      # filter out only the rows with RMSE metric 
-           arrange(mean)                     # arrange the rows in ascending order of RMSE
-
-head(results, 5)
-
-kmin <- results %>%           # find the k value with lowest RMSE
-        slice(1) %>%          # slice the first row of the dataframe to get the row with the lowest RMSE
-        pull(neighbors)       # pulls the number of neighbors in the neighbors column
+source("../src/find_k_min.R")
+recipe = find_k_min(training)[[1]]
+knn_spec = find_k_min(training)[[2]]
+kmin = find_k_min(training)[[3]]
+results = find_k_min(training)[[4]]
 ```
 
 ```{r}
@@ -186,28 +123,10 @@ accuracy_vs_k <- ggplot(results, aes(x = neighbors, y = mean)) +     # plot K vs
 
 accuracy_vs_k
 ```
-
 ```{r}
-# plug in the best k value that we found above
-knn_spec_2 <- nearest_neighbor(weight_func = "rectangular", neighbors = kmin) %>%      
-              set_engine("kknn") %>%      
-              set_mode("regression")
-
-knn_fit <- workflow() %>%      
-           add_recipe(recipe) %>%         # add the same recipe above    
-           add_model(knn_spec_2) %>%      # add the new model with the best k-value that we found
-           fit(data = training)           # fit the training data
-
-predictions <- knn_fit %>%                # fit the workflow  
-               predict(testing) %>%       # predict the daily count for each observation in the test set
-               bind_cols(testing)         # put the column with all the predictions into the test data frame
-
-# find the predicted RMSE
-summary <- predictions %>%
-           metrics(truth = cnt, estimate = .pred) %>%   
-           filter(.metric == "rmse")%>%                       
-           select(.estimate)                                     
-summary
+source("../src/prediction.R")
+predicted_RMSE <- prediction(kmin,recipe,training,testing)
+predicted_RMSE
 ```
 
 ## Discussion
