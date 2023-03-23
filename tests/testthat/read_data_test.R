@@ -10,3 +10,9 @@ test_that("`read_data` should return a data frame", {
 test_that("`read_data` returns a dataframe with 2 columns", {
   expect_equal(ncol(read_data(file_path,c("w","x"))), 2)
 })
+
+test_that("`read_data` should throw an error when incorrect types 
+are passed to `file_path` and `cols` arguments", {
+  expect_error(count_classes(hi, "y"))
+  expect_error(count_classes(file_path, y))
+})
