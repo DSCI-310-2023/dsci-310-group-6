@@ -1,4 +1,3 @@
-# Author: Jialu Jin
 #' Splits the input data into training and testing sets.
 #'
 #' When the third input is "train": 
