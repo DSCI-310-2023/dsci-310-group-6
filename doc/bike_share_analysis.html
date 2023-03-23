@@ -489,10 +489,11 @@ head(data)         # print first few rows of the dataframe</code></pre>
 ## 5 0.1869000 1600
 ## 6 0.0895652 1606</code></pre>
 <p>Finding the min and max range</p>
-<pre class="r"><code># find the range and median of the daily count
-max &lt;- max(data$cnt)
-min &lt;- min(data$cnt)
-med &lt;- median(data$cnt)
+<pre class="r"><code>source(&quot;../src/summary_data.R&quot;)
+# find the range and median of the daily count
+max &lt;- get_max(data, &quot;cnt&quot;)
+min &lt;- get_min(data, &quot;cnt&quot;)
+med &lt;- get_med(data, &quot;cnt&quot;)
 max</code></pre>
 <pre><code>## [1] 8714</code></pre>
 <pre class="r"><code>min</code></pre>

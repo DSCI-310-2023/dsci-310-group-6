@@ -24,21 +24,27 @@ First, clone this GitHub repository and open the terminal. In the terminal, navi
 
 We use a Docker container image to make the computational environment for this project reproducible.
 
-To interactively run Jupyter lab inside the `jialujin/dsci-310-group-6` Docker container, type the following in terminal, after navigating to the root of this project repository:
+To interactively run R Studio inside the `jialujin/dsci-310-group-6` Docker container, type the following in terminal, after navigating to the root of this project repository:
 
   ```
-  docker run -it -p 8787:8787 jialujin/dsci-310-group-6:latest
-  docker run -it --rm -p 8787:8787 -e PASSWORD="apassword" rocker/rstudio:4.1.2
-  docker run -it --rm -p 8787:8787 -v $(pwd):/home/rstudio/ imagename
+  docker run -it --rm -p 8787:8787 -e PASSWORD=asdf -v "/$(pwd)":/home/rstudio/ jialujin/dsci-310-group-6
 
   ```
-- Once the container has launched, users need to copy the URL to a web browser on your computer and type: `http://localhost:8787` into their web browser to access Jupyter Lab
-- Next, in Jupyter lab, navigate to, and open `analysis.ipynb` and click **Kernel** > **Restart and runall** to run the entire analysis.
+- Once the container has launched, users need to copy the URL to a web browser on your computer and type: `http://localhost:8787` into their web browser to access R Studio
+- Next, in R Studio, navigate to, and open `bike_share_analysis.RMD`in the doc folder. Click **Knit** to run the entire analysis.
 - when done working, type `docker rm ` to remove the dangling container.
 
 ## Dependencies:
 
-R version 4.1.1, Jupyter and R packages listed in [environment.yml](environment.yml).
+R version 4.1.1 with R packages:
+    r-GGally=2.1.2 \
+    r-tidyverse=1.3.2 \
+    r-tidymodels=1.0.0 \
+    r-testthat=3.1.6 \
+    r-repr=1.1.4 \
+    r-readxl=1.4.1 \
+    r-digest=0.6.31 \
+    r-kknn=1.3.1 
 
 ## License Information
 
