@@ -40,6 +40,7 @@ find_k_min <- function(training){
     collect_metrics() %>%          
     filter(.metric == "rmse")%>%      # filter out only the rows with RMSE metric 
     arrange(mean)                     # arrange the rows in ascending order of RMSE
+    write.csv(data, file = "data/rmse_results.csv", row.names = FALSE)
   top_ks = head(results, 5)
   
   kmin <- results %>%           # find the k value with lowest RMSE

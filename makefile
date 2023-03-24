@@ -6,6 +6,12 @@
 data/clean_data.csv: src/read_data.R data/day.csv
 	Rscript -e 'source("src/read_data.R"); read_data("data/day.csv",c("instant", "dteday", "yr", "holiday", "casual", "registered"))'
 	
+# split data into training and testing
+
+data/training_data.csv data/testing_data.csv: src/split_data.R data/clean_data.csv
+	Rscript -e 'source("src/split_data.R"); split_data(read.csv("data/clean_data.csv"),0.8, "train")'
+	
+	
 # generate correlation plot figure
 
 results/correlation_plot.png: src/create_pairplot.R data/clean_data.csv
