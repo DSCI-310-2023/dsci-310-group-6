@@ -4,4 +4,5 @@
 # generate clean data
 
 data/clean_data.csv: src/read_data.R data/day.csv
-	Rscript src/read_data.R --file_path="data/day.csv" --cols='c("instant", "dteday", "yr", "holiday", "casual", "registered")'
+	Rscript -e 'source("src/read_data.R"); read_data("data/day.csv",c("instant", "dteday", "yr", "holiday", "casual", "registered"))'
+	
