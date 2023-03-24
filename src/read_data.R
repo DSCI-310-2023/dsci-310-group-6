@@ -14,18 +14,16 @@
 
 library(tidyverse)
 
-read_data <- function(file_path, cols = NULL) {
+read_data <- function(file_path) {
   if(!is.character(file_path)) {
     stop("`read_data` expects a quoted path of the data file as the first input")
   } 
-  else if(!is.character(file_path) & !is.null(cols)) {
+  else if(!is.character(file_path)) {
     stop("`read_data` expects either a list of unquoted column names as the second input")
   }
-  
   data <- read.csv(file_path, sep=',', header = TRUE)
-  if (!is.null(cols)) {
-    data <- data[, !(names(data) %in% cols)]
-  }
+  data <- data[ , !(names(data) %in% c("instant", "dteday", "yr", "holiday", "casual", "registered"))]
+  
   
   return(data)
 }
