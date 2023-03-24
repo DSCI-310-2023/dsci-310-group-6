@@ -1,7 +1,7 @@
 # Author: Linda Huang
 # Date: 2023-03-10
 
-"This script take one dataframe and one column name to produce the mean, max, min of the column 
+"This script take one dataframe and one column name to produce the median, max, min of the column 
 
 Usage: summary_dats.R
 "
