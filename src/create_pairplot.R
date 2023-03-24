@@ -17,6 +17,13 @@ library(ggplot2)
 library(GGally)
 
 create_pairplot <- function(data, plot_title = NULL) {
+  if (!is.data.frame(data)) {
+    stop("`data` should be a data frame")
+  }
+  else if (!is.null(plot_title) & !is.character(plot_title)) {
+    stop("`plot_title` should either be NULL or a character") 
+  }
+  
   correlation_plot <- ggpairs(data = data, title = plot_title )
   ggsave("correlation_plot.png",plot = correlation_plot, device="png", path="../results" )
   return(correlation_plot)
