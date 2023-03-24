@@ -1,3 +1,5 @@
+
+
 library(testthat)
 source("../../src/summary_data.R")
 
@@ -7,6 +9,7 @@ file_path <- "summary_data_helper.csv"
 
 # Example dataset
 my_data <- read.csv(file_path, sep=',', header = TRUE)
+
 
 # Test that the function return the right max
 test_that("`summary_data` should return 50", {
@@ -21,5 +24,11 @@ test_that("`summary_data` should return 100", {
 # Test that the function return the right median
 test_that("`summary_data` should return 100", {
   expect_equal(get_med(my_data, "x"), 3)
+})
+
+# Test that the function handles exception when number passed for "column name"
+test_that("`summary_data` should return an error when incorrect types 
+are passed to `training` arguments", {
+  expect_error(get_med(my_data, 3))
 })
 
