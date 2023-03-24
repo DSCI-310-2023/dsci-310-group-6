@@ -30,7 +30,7 @@ To interactively run R Studio inside the `jialujin/dsci-310-group-6` Docker cont
   docker run -it --rm -p 8787:8787 -e PASSWORD=asdf -v "/$(pwd)":/home/rstudio/ jialujin/dsci-310-group-6
 
   ```
-- Once the container has launched, users need to copy the URL to a web browser on your computer and type: `http://localhost:8787` into their web browser to access R Studio
+- Once the container has launched, users need to copy the URL to a web browser on your computer and type: `http://localhost:8787` into their web browser to access R Studio. A login panel will appear on the webpage and you can enter username as "rstudio", with password "asdf"
 - Next, in R Studio, navigate to, and open `bike_share_analysis.RMD`in the doc folder. Click **Knit** to run the entire analysis.
 - when done working, type `docker rm ` to remove the dangling container.
 
@@ -38,12 +38,12 @@ To interactively run R Studio inside the `jialujin/dsci-310-group-6` Docker cont
 
 R version 4.1.1 with R packages:
     r-GGally=2.1.2 \
-    r-tidyverse=1.3.2 \
-    r-tidymodels=1.0.0 \
+    r-tidyverse=1.3.1 \
+    r-tidymodels=0.2.0 \
     r-testthat=3.1.6 \
     r-repr=1.1.4 \
-    r-readxl=1.4.1 \
-    r-digest=0.6.31 \
+    r-readxl=1.4.0 \
+    r-digest=0.6.29 \
     r-kknn=1.3.1 
 
 ## License Information
