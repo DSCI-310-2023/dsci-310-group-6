@@ -15,6 +15,7 @@ test_that("`prediction` should return a double", {
   expect_true(is_double(prediction(kmin,recipe,training,testing)))
 })
 
+# `prediction` should throw an error when incorrect types are passed to `kmin`, `recipe`, `training` and `testing` arguments"
 test_that("`prediction` should throw an error when incorrect types 
 are passed to `kmin`, `recipe`, `training` and `testing` arguments", {
   expect_error(prediction(2.5,recipe,training,testing))
