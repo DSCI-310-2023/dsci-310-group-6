@@ -10,6 +10,7 @@ test_that("`fin_k_min` should return a list", {
   expect_true(is_list(find_k_min(training)))
 })
 
+# `fin_k_min` should throw an error when incorrect types are passed to `training` arguments"
 test_that("`fin_k_min` should throw an error when incorrect types 
 are passed to `training` arguments", {
   expect_error(fin_k_min(hi))

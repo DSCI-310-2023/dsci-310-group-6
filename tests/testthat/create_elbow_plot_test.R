@@ -12,6 +12,7 @@ test_that("`create_elbow_plot` should have title 'K Neighbours vs RMSE'", {
   expect_equal(elbow_plot$label$title, "K Neighbours vs RMSE")
 })
 
+# `create_elbow_plot` should throw an error when incorrect types are passed to `results` arguments"
 test_that("`create_elbow_plot` should throw an error when incorrect types 
 are passed to `results` arguments", {
   expect_error(create_elbow_plot(hi))
