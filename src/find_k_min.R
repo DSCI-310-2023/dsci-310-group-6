@@ -17,6 +17,8 @@
 
 library(tidymodels)
 library(tidyverse)
+library(kknn)
+library(here)
 find_k_min <- function(training){
   if (!is.data.frame(training)) {
     stop("`training` should be a data frame")
@@ -40,12 +42,12 @@ find_k_min <- function(training){
     collect_metrics() %>%          
     filter(.metric == "rmse")%>%      # filter out only the rows with RMSE metric 
     arrange(mean)                     # arrange the rows in ascending order of RMSE
-    write.csv(results, file = "data/rmse_results.csv", row.names = FALSE)
+    write.csv(results, file = here("../data/rmse_results.csv"), row.names = FALSE)
   top_ks = head(results, 5)
   
   kmin <- results %>%           # find the k value with lowest RMSE
     slice(1) %>%          # slice the first row of the dataframe to get the row with the lowest RMSE
     pull(neighbors)       # pulls the number of neighbors in the neighbors column
-  return (list(recipe,knn_spec,kmin, results))
+  return(list(recipe,knn_spec,kmin, results))
 }
 

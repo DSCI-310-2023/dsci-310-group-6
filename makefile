@@ -25,3 +25,13 @@ results/correlation_plot.png: src/create_pairplot.R data/clean_data.csv
 
 results/elbow_plot.png: src/create_elbow_plot.R data/rmse_results.csv
 	Rscript -e 'source("src/create_elbow_plot.R"); create_elbow_plot(as_tibble(read.csv("data/rmse_results.csv")))'
+	
+	
+# generate HTML
+doc/bike_share_analysis.html: doc/bike_share_analysis.Rmd src/find_k_min.R
+	Rscript -e "rmarkdown::render('doc/bike_share_analysis.Rmd', 'html_document')"
+
+#clean	
+clean:
+	rm -rf results
+	rm -rf doc/bike_share_analysis.html
