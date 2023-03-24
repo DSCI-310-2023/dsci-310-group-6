@@ -1,11 +1,17 @@
-# Author: Linda Huang
-# Date: 2023-03-10
-
-"This script take one dataframe and one column name to produce the median, max, min of the column 
-
-Usage: summary_dats.R
-"
-
+#' Generates a pairplot plotting a scatter chart 
+#' and showing correlation between attributes. Also allows a title to be placed
+#'
+#' Save the pairplot in the results folder
+#'
+#' @param data A dataframe we are going to use
+#' @param column_name A string representing the column we want to explore
+#'
+#' @return The max, min and median value
+#'
+#' @export
+#'
+#' @examples
+#' get_max(data, "year")
 
 get_max <- function(data, column_name) {
   max_value <- max(data[[column_name]])
