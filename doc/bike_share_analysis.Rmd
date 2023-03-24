@@ -6,7 +6,7 @@ output: html_document
 # Predicting Count of Total Rental Bikes Using KNN Regression
 ## "Authors: Cindy Jin, Linda Huang, Davis Li"
 
-```{r include = FALSE}
+```{r setup, include = FALSE}
 library(kknn)
 library(tidyverse)
 library(readxl)
@@ -54,7 +54,7 @@ Using the R programming language and the tidymodels and tidyverse R packages, we
 
 ### Result
 
-``` {r}
+``` {r read_data}
 data_path = "../data/day.csv"
 source("../src/read_data.R")
 data <- read_data(data_path,c("instant", "dteday", "yr", "holiday", "casual", "registered"))     # read the data and unselect some useless columns
@@ -109,19 +109,9 @@ results = find_k_min(training)[[4]]
 ```
 
 ```{r}
-options(repr.plot.width = 8, repr.plot.height = 8)             # set plot width and height    
-accuracy_vs_k <- ggplot(results, aes(x = neighbors, y = mean)) +     # plot K vs RMSE 
-                 geom_point() + geom_line() +                        # specify that each point in the graph will be connected by lines
-                 labs(x = "Neighbors", y = "Mean RMSE") +    
-                 scale_x_continuous(breaks = seq(0, 20, by = 1)) +   
-                 ggtitle("K Neighbours vs RMSE") +                   # give the graph a title
-                 theme(axis.title.x = element_text(size = 15),       
-                       axis.text.x = element_text(size = 15),
-                       axis.text.y = element_text(size = 15),
-                       axis.title.y = element_text(size = 15),
-                       plot.title = element_text(size = 20, hjust = 0.5))
-
-accuracy_vs_k
+source("../src/create_elbow_plot.R")
+elbow_plot <- create_elbow_plot(results)
+elbow_plot
 ```
 ```{r}
 source("../src/prediction.R")

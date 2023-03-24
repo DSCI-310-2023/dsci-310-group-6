@@ -14,5 +14,5 @@ library(GGally)
 create_pairplot <- function(data, plot_title = NULL) {
   correlation_plot <- ggpairs(data = data, title = plot_title )
   
-  ggsave("correlation_plot.png",device="png", path="results" )
+  ggsave("correlation_plot.png",device="png", path="../../results" )
 }
