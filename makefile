@@ -23,5 +23,5 @@ results/correlation_plot.png: src/create_pairplot.R data/clean_data.csv
 	
 # generate elbow plot figure
 
-results/elbow_plot.png: src/create_elbow_plot.R data/clean_data.csv
-	Rscript -e 'source("src/create_elbow_plot.R"); create_pairplot(read.csv("data/clean_data.csv"), "Pairplot of Bike Share Data Attributes")'
+results/elbow_plot.png: src/create_elbow_plot.R data/rmse_results.csv
+	Rscript -e 'source("src/create_elbow_plot.R"); create_elbow_plot(as_tibble(read.csv("data/rmse_results.csv")))'
