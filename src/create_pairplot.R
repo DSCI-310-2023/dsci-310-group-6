@@ -25,6 +25,6 @@ create_pairplot <- function(data, plot_title = NULL) {
   }
   
   correlation_plot <- ggpairs(data = data, title = plot_title )
-  ggsave("correlation_plot.png",plot = correlation_plot, device="png", path="../results" )
+  ggsave("correlation_plot.png",plot = correlation_plot, device="png", path="results", width = 12, height = 10 )
   return(correlation_plot)
 }
