@@ -11,6 +11,10 @@ data/clean_data.csv: src/read_data.R data/day.csv
 data/training_data.csv data/testing_data.csv: src/split_data.R data/clean_data.csv
 	Rscript -e 'source("src/split_data.R"); split_data(read.csv("data/clean_data.csv"),0.8, "train")'
 	
+# generate rmse results
+
+data/rmse_results.csv: src/find_k_min.R data/training_data.csv
+	Rscript -e 'source("src/find_k_min.R"); find_k_min(read.csv("data/training_data.csv"))'
 	
 # generate correlation plot figure
 
