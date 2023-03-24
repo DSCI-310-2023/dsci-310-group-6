@@ -9,16 +9,35 @@ Usage: summary_dats.R
 
 get_max <- function(data, column_name) {
   max_value <- max(data[[column_name]])
+  
+  # Check that column_name is a character string
+  if (!is.character(column_name)) {
+    stop("Column name must be a character string.")
+  }
+  
   return(max_value)
 }
 
+
 get_min <- function(data, column_name) {
   min_value <- min(data[[column_name]])
+  # Check that column_name is a character string
+  if (!is.character(column_name)) {
+    stop("Column name must be a character string.")
+  }
+  
   return(min_value)
 }
 
+
 get_med <- function(data, column_name) {
   med_value <- median(data[[column_name]])
+  
+  # Check that column_name is a character string
+  if (!is.character(column_name)) {
+    stop("Column name must be a character string.")
+  }
+
   return(med_value)
 }
 
