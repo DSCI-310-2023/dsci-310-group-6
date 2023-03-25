@@ -1,5 +1,6 @@
 library(testthat)
-source("../../src/create_pairplot.R")
+library(here)
+source(here("src/create_pairplot.R"))
 
 # Create a test dataset
 test_data <- iris[,1:4]

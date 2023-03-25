@@ -15,6 +15,7 @@
 
 library(ggplot2)
 library(GGally)
+library(here)
 
 create_pairplot <- function(data, plot_title = NULL) {
   if (!is.data.frame(data)) {
@@ -25,6 +26,6 @@ create_pairplot <- function(data, plot_title = NULL) {
   }
   
   correlation_plot <- ggpairs(data = data, title = plot_title )
-  ggsave("correlation_plot.png",plot = correlation_plot, device="png", path="results", width = 12, height = 10 )
+  ggsave("correlation_plot.png",plot = correlation_plot, device="png", path= here("tests/results"), width = 12, height = 10 )
   return(correlation_plot)
 }

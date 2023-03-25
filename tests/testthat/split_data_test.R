@@ -1,7 +1,8 @@
 library(testthat)
-source("../../src/split_data.r")
+library(here)
+source(here('src/split_data.r'))
 
-data <- read.csv("../../data/day.csv")
+data <- read.csv(here("data/day.csv"))
 
 # Test that the function returns the correct training set with 511 rows
 test_that("`split_data` should return a training set with 511 rows", {
