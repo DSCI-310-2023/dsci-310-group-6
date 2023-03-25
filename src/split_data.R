@@ -31,8 +31,8 @@ split_data <- function(data,prop,train_test) {
   
   training <- sample_n(data, nrow(data)*prop, replace = FALSE)
   testing <- anti_join(data, training)
-  write.csv(training, file = "data/training_data.csv", row.names = FALSE)
-  write.csv(testing, file = "data/testing_data.csv", row.names = FALSE)
+  write.csv(training, file = here("data/training_data.csv"), row.names = FALSE)
+  write.csv(testing, file = here("data/testing_data.csv"), row.names = FALSE)
   if (train_test == "train") {
     return (training)
   }

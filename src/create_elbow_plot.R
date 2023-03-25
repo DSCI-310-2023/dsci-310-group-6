@@ -11,6 +11,7 @@
 #' @examples
 #' read_data("read_data_helper.csv", c("w","x"))
 library(tidyverse)
+library(here)
 
 create_elbow_plot <- function(results){
   if (!is_tibble(results)){
@@ -27,6 +28,6 @@ create_elbow_plot <- function(results){
         axis.text.y = element_text(size = 15),
         axis.title.y = element_text(size = 15),
         plot.title = element_text(size = 20, hjust = 0.5))
-  ggsave("elbow_plot.png",device="png", path="results", width = 8, height = 8)
+  ggsave("elbow_plot.png",device="png", path=here("tests/results"), width = 8, height = 8)
   return(elbow_plot)
 }

@@ -26,7 +26,7 @@ read_data <- function(file_path, cols = NULL) {
   if (!is.null(cols)) {
     data <- data[, !(names(data) %in% cols)]
   }
-  write.csv(data, file = "data/clean_data.csv", row.names = FALSE)
+  write.csv(data, file = here("data/clean_data.csv"), row.names = FALSE)
   
   return(data)
 }

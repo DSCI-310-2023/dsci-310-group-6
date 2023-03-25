@@ -1,8 +1,10 @@
 # testthat
 library(testthat)
-source("../../src/read_data.r")
+library(here)
+source(here('src/read_data.r'))
 
-file_path <- "../../data/day.csv"
+file_path <- here('data/day.csv')
+
 
 # Test that the function returns a data frame
 test_that("`read_data` should return a data frame", {

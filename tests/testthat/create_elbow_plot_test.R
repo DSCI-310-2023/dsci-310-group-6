@@ -1,8 +1,9 @@
 library(testthat)
-source("../../src/create_elbow_plot.r")
-source("../../src/find_k_min.r")
+library(here)
+source(here("src/create_elbow_plot.r"))
+source(here("src/find_k_min.r"))
 
-data <- read.csv("../../data/day.csv", sep=',', header = TRUE)
+data <- read.csv(here("data/day.csv"), sep=',', header = TRUE)
 training <- sample_n(data, nrow(data)*0.5, replace = FALSE)
 results <- find_k_min(training)[[4]]
 
