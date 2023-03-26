@@ -88,7 +88,7 @@ knitr::kable(missing_values_df, caption = "Missing values of bike data")
 
 For the final part of our exploratory data analysis, lets explore the correlations between all factors in the graph below:
 
-```{r, echo = FALSE, message = FALSE}
+```{r, echo = FALSE, message = FALSE, warning= FALSE}
 knitr::include_graphics(here("../results/correlation_plot.png"))
 ```
 
@@ -96,7 +96,7 @@ To start building the model, we first separate the data set into training set an
 -   selected cnt as the target variable and windspeed&atemp&season as predictor variables,
 -   scaled and centered the predictor variables so that each variable is worth the same
 
-```{r, echo = FALSE, message = FALSE}
+```{r, echo = FALSE, message = FALSE, warning= FALSE}
 knitr::include_graphics(here("../results/elbow_plot.png"))
 ```
 

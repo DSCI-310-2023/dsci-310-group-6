@@ -17,6 +17,7 @@
 #' split_data(data,0.6,"train") 
 
 library(dplyr)
+library(here)
 
 split_data <- function(data,prop,train_test) {
   if (!is.data.frame(data)) {
