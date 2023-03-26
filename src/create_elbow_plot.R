@@ -28,6 +28,6 @@ create_elbow_plot <- function(results){
         axis.text.y = element_text(size = 15),
         axis.title.y = element_text(size = 15),
         plot.title = element_text(size = 20, hjust = 0.5))
-  ggsave("elbow_plot.png",device="png", path=here("tests/results"), width = 8, height = 8)
+  ggsave("elbow_plot.png",device="png", path=here("results"), width = 8, height = 8)
   return(elbow_plot)
 }

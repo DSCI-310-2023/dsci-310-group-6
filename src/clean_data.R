@@ -13,8 +13,9 @@
 #' read_data("read_data_helper.csv", c("w","x"))
 
 library(tidyverse)
+library(here)
 
-read_data <- function(file_path, cols = NULL) {
+clean_data <- function(file_path, cols = NULL) {
   if(!is.character(file_path)) {
     stop("`read_data` expects a quoted path of the data file as the first input")
   } 
