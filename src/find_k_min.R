@@ -42,7 +42,7 @@ find_k_min <- function(training){
     collect_metrics() %>%          
     filter(.metric == "rmse")%>%      # filter out only the rows with RMSE metric 
     arrange(mean)                     # arrange the rows in ascending order of RMSE
-    write.csv(results, file = here("data/rmse_results.csv"), row.names = FALSE)
+  write.csv(results, file = here("../data/rmse_results.csv"), row.names = FALSE)
   top_ks = head(results, 5)
   
   kmin <- results %>%           # find the k value with lowest RMSE
@@ -50,4 +50,3 @@ find_k_min <- function(training){
     pull(neighbors)       # pulls the number of neighbors in the neighbors column
   return(list(recipe,knn_spec,kmin, results))
 }
-
