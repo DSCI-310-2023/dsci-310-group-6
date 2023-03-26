@@ -106,7 +106,7 @@ testing <- read_csv(here('../data/testing_data.csv'))
 source(here("../src/find_k_min.R"))
 ```
 ```{r, echo = FALSE, message = FALSE}
-k_list <- find_k_min(training)
+k_list <- find_k_min(here('../data/training_data.csv'), "/home/rstudio/data/rmse_results.csv")
 recipe = k_list[[1]]
 kmin = k_list[[3]]
 ```

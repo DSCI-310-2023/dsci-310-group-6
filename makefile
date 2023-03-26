@@ -12,22 +12,22 @@ data/clean_data.csv: src/clean_data.R data/day.csv
 # taking clean data and splitting data into training and testing
 
 data/training_data.csv data/testing_data.csv: src/split_data.R data/clean_data.csv
-	Rscript -e 'source("src/split_data.R"); split_data(read.csv("data/clean_data.csv"),0.8, "train")'
+	Rscript -e 'source("src/split_data.R"); split_data("data/clean_data.csv",0.8, "train", "data/training_data.csv", "data/testing_data.csv")'
 	
 # generate correlation plot figure for EDA
 
 results/correlation_plot.png: src/create_pairplot.R data/clean_data.csv
-	Rscript -e 'source("src/create_pairplot.R"); create_pairplot(read.csv("data/clean_data.csv"), "Pairplot of Bike Share Data Attributes")'	
+	Rscript -e 'source("src/create_pairplot.R"); create_pairplot("data/clean_data.csv","results","Pairplot of Bike Share Data Attributes")'	
 
 # generate rmse results from training data and stores to CSV in data
 
 data/rmse_results.csv: src/find_k_min.R data/training_data.csv
-	Rscript -e 'source("src/find_k_min.R"); find_k_min(read.csv("data/training_data.csv"))'
+	Rscript -e 'source("src/find_k_min.R"); find_k_min("data/training_data.csv", "/home/rstudio/data/rmse_results.csv")'
 	
 # generate elbow plot figure using the RMSE results 
 
 results/elbow_plot.png: src/create_elbow_plot.R data/rmse_results.csv
-	Rscript -e 'source("src/create_elbow_plot.R"); create_elbow_plot(as_tibble(read.csv("data/rmse_results.csv")))'
+	Rscript -e 'source("src/create_elbow_plot.R"); create_elbow_plot("data/rmse_results.csv", "results")'
 	
 # generate HTML
 doc/bike_share_analysis.html: doc/bike_share_analysis.Rmd src/find_k_min.R

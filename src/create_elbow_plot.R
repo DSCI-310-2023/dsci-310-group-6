@@ -13,7 +13,8 @@
 library(tidyverse)
 library(here)
 
-create_elbow_plot <- function(results){
+create_elbow_plot <- function(input_result_path, output_path){
+  results <- as_tibble(read.csv(input_result_path))
   if (!is_tibble(results)){
     stop("`results` should be a tibble")
   }
@@ -28,6 +29,6 @@ create_elbow_plot <- function(results){
         axis.text.y = element_text(size = 15),
         axis.title.y = element_text(size = 15),
         plot.title = element_text(size = 20, hjust = 0.5))
-  ggsave("elbow_plot.png",device="png", path=here("results"), width = 8, height = 8)
+  ggsave("elbow_plot.png",device="png", path=here(output_path), width = 8, height = 8)
   return(elbow_plot)
 }
