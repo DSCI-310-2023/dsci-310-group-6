@@ -19,7 +19,7 @@
 library(dplyr)
 library(here)
 
-split_data <- function(input_path,prop,train_test, output_train_path, output_test_path) {
+split_data <- function(input_path,prop,train_test, output_train_path = NULL, output_test_path = NULL) {
   data <- read.csv(input_path)
   if (!is.data.frame(data)) {
     stop("`input_path` should be a data frame")
@@ -33,8 +33,13 @@ split_data <- function(input_path,prop,train_test, output_train_path, output_tes
   
   training <- sample_n(data, nrow(data)*prop, replace = FALSE)
   testing <- anti_join(data, training)
-  write.csv(training, file = here(output_train_path), row.names = FALSE)
-  write.csv(testing, file = here(output_test_path), row.names = FALSE)
+  if (!is.null(output_train_path)) {
+    write.csv(training, file = here(output_train_path), row.names = FALSE)
+  }
+  if (!is.null(output_test_path)) {
+    write.csv(testing, file = here(output_test_path), row.names = FALSE)
+  }
+  
   if (train_test == "train") {
     return (training)
   }

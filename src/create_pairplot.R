@@ -17,7 +17,7 @@ library(ggplot2)
 library(GGally)
 library(here)
 
-create_pairplot <- function(input_path, output_path, plot_title = NULL) {
+create_pairplot <- function(input_path, output_path = NULL, plot_title = NULL) {
   data <- read.csv(input_path)
   if (!is.data.frame(data)) {
     stop("`data` should be a data frame")
@@ -27,6 +27,10 @@ create_pairplot <- function(input_path, output_path, plot_title = NULL) {
   }
   
   correlation_plot <- ggpairs(data = data, title = plot_title )
-  ggsave("correlation_plot.png",plot = correlation_plot, device="png", path= here(output_path), width = 12, height = 10 )
+  if (!is.null(output_path)) {
+    ggsave("correlation_plot.png",plot = correlation_plot, device="png", path= here(output_path), width = 12, height = 10)
+    pdf(NULL) 
+  }
+  
   return(correlation_plot)
 }
