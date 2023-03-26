@@ -1,6 +1,8 @@
 # author: Davis Li
 # date: 2023-03-24
 
+# NOTE: 
+
 # make all to run everything together
 all: data/clean_data.csv data/training_data.csv data/testing_data.csv results/correlation_plot.png data/rmse_results.csv results/elbow_plot.png doc/bike_share_analysis.html
 

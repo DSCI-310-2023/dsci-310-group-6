@@ -15,15 +15,15 @@
 library(tidyverse)
 library(here)
 
-clean_data <- function(intput_path, output_path, cols = NULL) {
-  if(!is.character(intput_path)) {
+clean_data <- function(input_path, output_path, cols = NULL) {
+  if(!is.character(input_path)) {
     stop("`read_data` expects a quoted path of the data file as the first input")
   } 
-  else if(!is.character(intput_path) & !is.null(cols)) {
+  else if(!is.character(input_path) & !is.null(cols)) {
     stop("`read_data` expects either a list of unquoted column names as the second input")
   }
   
-  data <- read.csv(intput_path, sep=',', header = TRUE)
+  data <- read.csv(input_path, sep=',', header = TRUE)
   if (!is.null(cols)) {
     data <- data[, !(names(data) %in% cols)]
   }
