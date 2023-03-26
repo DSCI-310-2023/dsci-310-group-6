@@ -15,7 +15,7 @@
 library(tidyverse)
 library(here)
 
-clean_data <- function(input_path, output_path, cols = NULL) {
+clean_data <- function(input_path, output_path = NULL, cols = NULL) {
   if(!is.character(input_path)) {
     stop("`read_data` expects a quoted path of the data file as the first input")
   } 
@@ -27,7 +27,9 @@ clean_data <- function(input_path, output_path, cols = NULL) {
   if (!is.null(cols)) {
     data <- data[, !(names(data) %in% cols)]
   }
-  write.csv(data, file = output_path, row.names = FALSE)
+  if (!is.null(output_path)) {
+    write.csv(data, file = output_path, row.names = FALSE)
+  }
   
   return(data)
 }
