@@ -7,7 +7,7 @@ all: data/clean_data.csv data/training_data.csv data/testing_data.csv results/co
 # generate clean data
 
 data/clean_data.csv: src/clean_data.R data/day.csv
-	Rscript -e 'source("src/clean_data.R"); clean_data("data/day.csv",c("instant", "dteday", "yr", "holiday", "casual", "registered"))'
+	Rscript -e 'source("src/clean_data.R"); clean_data("data/day.csv", "data/clean_data.csv", c("instant", "dteday", "yr", "holiday", "casual", "registered"))'
 	
 # taking clean data and splitting data into training and testing
 

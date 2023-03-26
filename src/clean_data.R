@@ -1,8 +1,8 @@
 #' Reads data and unselect the specified columns
 #'
-#' Return the data frame without the specified columns from the file_path
+#' Return the data frame without the specified columns from the intput_path
 #'
-#' @param file_path A quoted path to the data file
+#' @param intput_path A quoted path to the data file
 #' @param cols A list of quoted column name that we want to unselect
 #'
 #' @return A data frame excluding the specified columns
@@ -15,19 +15,19 @@
 library(tidyverse)
 library(here)
 
-clean_data <- function(file_path, cols = NULL) {
-  if(!is.character(file_path)) {
+clean_data <- function(intput_path, output_path, cols = NULL) {
+  if(!is.character(intput_path)) {
     stop("`read_data` expects a quoted path of the data file as the first input")
   } 
-  else if(!is.character(file_path) & !is.null(cols)) {
+  else if(!is.character(intput_path) & !is.null(cols)) {
     stop("`read_data` expects either a list of unquoted column names as the second input")
   }
   
-  data <- read.csv(file_path, sep=',', header = TRUE)
+  data <- read.csv(intput_path, sep=',', header = TRUE)
   if (!is.null(cols)) {
     data <- data[, !(names(data) %in% cols)]
   }
-  write.csv(data, file = here("data/clean_data.csv"), row.names = FALSE)
+  write.csv(data, file = output_path, row.names = FALSE)
   
   return(data)
 }
