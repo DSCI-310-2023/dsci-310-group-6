@@ -1,7 +1,7 @@
 library(testthat)
 library(here)
 
-path_k_min <- here('/find_k_min.R')
+path_k_min <- source('../../src/find_k_min.R')
 source(here('src/find_k_min.R'))
 
 path_data <- here('data/day.csv')

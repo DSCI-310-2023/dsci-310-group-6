@@ -61,13 +61,13 @@ First let's take a look at a preview of what the bike data looks like:
 
 ```{r read_data, echo = FALSE, message=FALSE}
 
-data <- read_csv("../data/clean_data.csv")     # read the data and unselect some useless columns
+data <- read_csv(here("../data/clean_data.csv"))     # read the data and unselect some useless columns
 data_head <- head(data)         # print first few rows of the dataframe
 knitr::kable(data_head, caption = "Preview of bike data")
 ```
 
 ```{r, echo = FALSE}
-source("../src/summary_data.R")
+source(here("../src/summary_data.R"))
 # find the range and median of the daily count
 max <- get_max(data, "cnt")
 min <- get_min(data, "cnt")
@@ -89,7 +89,7 @@ knitr::kable(missing_values_df, caption = "Missing values of bike data")
 For the final part of our exploratory data analysis, lets explore the correlations between all factors in the graph below:
 
 ```{r, echo = FALSE, message = FALSE}
-knitr::include_graphics("../results/correlation_plot.png")
+knitr::include_graphics(here("../results/correlation_plot.png"))
 ```
 
 To start building the model, we first separate the data set into training set and test set
@@ -97,13 +97,13 @@ To start building the model, we first separate the data set into training set an
 -   scaled and centered the predictor variables so that each variable is worth the same
 
 ```{r, echo = FALSE, message = FALSE}
-knitr::include_graphics("../results/elbow_plot.png")
+knitr::include_graphics(here("../results/elbow_plot.png"))
 ```
 
 ```{r, echo = FALSE, message = FALSE}
-training <- read_csv('../data/training_data.csv')
-testing <- read_csv('../data/testing_data.csv')
-source("../src/find_k_min.R")
+training <- read_csv(here('../data/training_data.csv'))
+testing <- read_csv(here('../data/testing_data.csv'))
+source(here("../src/find_k_min.R"))
 ```
 ```{r, echo = FALSE, message = FALSE}
 k_list <- find_k_min(training)
@@ -111,7 +111,7 @@ recipe = k_list[[1]]
 kmin = k_list[[3]]
 ```
 ```{r, echo = FALSE, message = FALSE}
-source("../src/prediction.r")
+source(here("../src/prediction.r"))
 predicted_RMSE <- prediction(kmin,recipe,training,testing)
 ```
 
