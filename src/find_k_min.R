@@ -19,7 +19,8 @@ library(tidymodels)
 library(tidyverse)
 library(kknn)
 library(here)
-find_k_min <- function(training){
+find_k_min <- function(input_training_path, output_results_path = NULL){
+  training <- read.csv(input_training_path)
   if (!is.data.frame(training)) {
     stop("`training` should be a data frame")
   }
@@ -42,7 +43,10 @@ find_k_min <- function(training){
     collect_metrics() %>%          
     filter(.metric == "rmse")%>%      # filter out only the rows with RMSE metric 
     arrange(mean)                     # arrange the rows in ascending order of RMSE
-  write.csv(results, file = "/home/rstudio/data/rmse_results.csv", row.names = FALSE) # hardcoded path because this function gets called in RMD and Tests, which would result in root folder being different each time
+  if (!is.null(output_results_path)) {
+    write.csv(results, file = output_results_path, row.names = FALSE) 
+  }
+  
   top_ks = head(results, 5)
   
   kmin <- results %>%           # find the k value with lowest RMSE

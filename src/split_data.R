@@ -14,14 +14,15 @@
 #' @export
 #'
 #' @examples
-#' split_data(data,0.6,"train") 
+#' split_data(input_path,0.6,"train", output_train_path, output_test_path) 
 
 library(dplyr)
 library(here)
 
-split_data <- function(data,prop,train_test) {
+split_data <- function(input_path,prop,train_test, output_train_path = NULL, output_test_path = NULL) {
+  data <- read.csv(input_path)
   if (!is.data.frame(data)) {
-    stop("`data` should be a data frame")
+    stop("`input_path` should be a data frame")
   }
   else if(!is.numeric(prop) | prop >= 1) {
     stop("`split_data` expects a number smaller than 1 as second input")
@@ -32,8 +33,13 @@ split_data <- function(data,prop,train_test) {
   
   training <- sample_n(data, nrow(data)*prop, replace = FALSE)
   testing <- anti_join(data, training)
-  write.csv(training, file = here("data/training_data.csv"), row.names = FALSE)
-  write.csv(testing, file = here("data/testing_data.csv"), row.names = FALSE)
+  if (!is.null(output_train_path)) {
+    write.csv(training, file = here(output_train_path), row.names = FALSE)
+  }
+  if (!is.null(output_test_path)) {
+    write.csv(testing, file = here(output_test_path), row.names = FALSE)
+  }
+  
   if (train_test == "train") {
     return (training)
   }
