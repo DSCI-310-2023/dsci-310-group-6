@@ -4,8 +4,6 @@ library(here)
 source(here('src/clean_data.r'))
 
 file_path <- here('data/day.csv')
-# output_path <- here("tests/testoutputs/clean_data.csv")
-
 
 # Test that the function returns a data frame
 test_that("`clean_data` should return a data frame", {
