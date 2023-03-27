@@ -48,11 +48,12 @@ R version 4.1.1 with R packages:
     r-GGally=2.1.2 \
     r-tidyverse=1.3.1 \
     r-tidymodels=0.2.0 \
-    r-testthat=3.1.6 \
+    r-testthat=3.1.3 \
     r-repr=1.1.4 \
     r-readxl=1.4.0 \
     r-digest=0.6.29 \
-    r-kknn=1.3.1 
+    r-kknn=1.3.1 \
+    r-here=1.0.1
 
 ## License Information
 
