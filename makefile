@@ -8,18 +8,12 @@ all: data/clean_data.csv data/training_data.csv data/testing_data.csv results/co
 
 # generate clean data
 
-# data/clean_data.csv: src/clean_data.R data/day.csv
-#	Rscript -e 'source("src/clean_data.R"); clean_data(input_path="data/day.csv", output_path="data/clean_data.csv", cols=c("instant", "dteday", "yr", "holiday", "casual", "registered"))'
-
-data/clean_data.csv: src/clean_data.R data/day.csv
+data/clean_data.csv: data/day.csv
 	Rscript -e 'datatheexplorer::clean_data(input_path="data/day.csv", output_path="data/clean_data.csv", cols=c("instant", "dteday", "yr", "holiday", "casual", "registered"))'
 
 # taking clean data and splitting data into training and testing
 
-# data/training_data.csv data/testing_data.csv: src/split_data.R data/clean_data.csv
-#	Rscript -e 'source("src/split_data.R"); split_data(input_path="data/clean_data.csv",prop=0.8, train_test="train", output_train_path="data/training_data.csv", output_test_path="data/testing_data.csv")'
-
-data/training_data.csv data/testing_data.csv: src/split_data.R data/clean_data.csv
+data/training_data.csv data/testing_data.csv: data/clean_data.csv
 	Rscript -e 'datatheexplorer::splitdata(input_path="data/clean_data.csv",prop=0.8, train_test="train", output_train_path="data/training_data.csv", output_test_path="data/testing_data.csv")'
 	
 # generate correlation plot figure for EDA
