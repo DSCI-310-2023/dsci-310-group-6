@@ -371,22 +371,6 @@ pre code {
 <div id="authors-cindy-jin-linda-huang-davis-li" class="section level2">
 <h2>“Authors: Cindy Jin, Linda Huang, Davis Li”</h2>
 </div>
-<div id="summary" class="section level2">
-<h2>Summary</h2>
-<p>We are going to build a regression model using the k-nearest
-neighbors algorithm. We will use three features: wind speed, normalized
-feeling temperature and season to predict the count of total rental
-bikes. This model could help the bike-sharing companies to better
-understand the distribution of the need for bikes and encourage people
-to support public transportation. Our current model has a prediction
-error, as measured by root mean squared error (RMSE), of about 1483.
-While we can improve the model given that the count of total rental
-bikes in our data set range from 22 to 8714, and the median count of
-total rental bikes is 4548, the model is still useful.</p>
-<p>The data we used to build our model contains all the daily counts of
-rental bikes between years 2011 and 2012 in Capital bikeshare system.
-The data was collected from <a href="https://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset" class="uri">https://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset</a>.</p>
-</div>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
 <p>Bike sharing is a top-rated service. When people need to commute
@@ -401,13 +385,10 @@ many bikes but there is a supply surplus? Therefore, our question is can
 we use some important factors to predict the number of count of total
 rental bikes including both casual and registered for a particular
 day?</p>
-<p>In an attempt to answer this question, we used a K-nearest neighbors
-regression model and data from daily counts of rental bikes between
-years 2011 and 2012 in Capital bikeshare system to build a regression
-model. We found that our regression model had a prediction error of
-about 1483. While we can improve the model given that the count of total
-rental bikes in our data set range from 22 to 8714, and the median count
-of total rental bikes is 4548, the model is still useful.</p>
+<p>In an attempt to answer this question, we are going to use a
+K-nearest neighbors regression model and data from daily counts of
+rental bikes between years 2011 and 2012 in Capital bikeshare system to
+build a regression model.</p>
 </div>
 <div id="methods" class="section level2">
 <h2>Methods</h2>
@@ -641,6 +622,22 @@ same</p>
 <p>After visualizing the elbow plot, we found the kmin. Based on the
 kmin, the predicted RMSE (root mean squared error) is 1437.7614296.</p>
 </div>
+</div>
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<p>We built a regression model using the k-nearest neighbors algorithm.
+We used three features: wind speed, normalized feeling temperature and
+season to predict the count of total rental bikes. This model could help
+the bike-sharing companies to better understand the distribution of the
+need for bikes and encourage people to support public transportation.
+Our current model has a prediction error, as measured by root mean
+squared error (RMSE), of about 1438. While we can improve the model
+given that the count of total rental bikes in our data set range from 22
+to 8714, and the median count of total rental bikes is 4548, the model
+is still useful.</p>
+<p>The data we used to build our model contains all the daily counts of
+rental bikes between years 2011 and 2012 in Capital bikeshare system.
+The data was collected from <a href="https://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset" class="uri">https://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset</a>.</p>
 </div>
 <div id="discussion" class="section level2">
 <h2>Discussion</h2>
