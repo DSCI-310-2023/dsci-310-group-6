@@ -9,20 +9,41 @@ The data we are using to compile this report and build our model is a "Bike Shar
 
 In this Data Analysis Report, we attempt to build a regression model using KNN algorithm. We will use windspeed (Wind Speed), atemp (Temperature), season (Season) attributes from the data set to predict the demand of bike during different hours, days of the week, and months. The resulting model will be able to help bike sharing business to better understand the demand of bike. Our current model has a prediction error, as measured by root mean squared error (RMSE), of about 1483. While we can improve the model given that the count of total rental bikes in our data set range from 22 to 8714, and the median count of total rental bikes is 4548, the model is still useful.
 
-## Report
 
-The analysis report can be found [here](analysis.ipynb).
+## Usage - How to interactively run and explore the project
 
-## Usage - How to interactively run and explore the project in Jupyter Lab
+Before you replicate the analysis, make sure that [Docker] (https://www.docker.com/get-started/) is installed and running. 
 
-First, clone this GitHub repository and open the terminal. In the terminal, navigate to the root folder of this project. 
+Then, clone this GitHub repository and open the terminal. In the terminal, navigate to the root folder of this project. 
 
   ```
   git clone https://github.com/JialuJin/dsci-310-group-6
 
   ```
+  
+A package has been created to improvehjghgjj3ht. 33444rteedq'≥;[ efficiency in analyzing data and simplify the process of predictive model building by integragting repetitive steps in the functions. 
 
-We use a Docker container image to make the computational environment for this project reproducible.
+Navigate to the cloned folder in local terminal (example steps shown below):
+
+1. Show the list of all folders in the current repository:
+  ```
+  ls 
+  ```
+  
+2. Navigate to the cloned folder:
+  ```
+  cd dsci-310-group-6-pkg 
+  ```
+3. Run pip to install the package locally:
+  ```
+  pip install .
+  ```
+
+Now the package should be installed and you will be able to import the package into the R Markdown file for generating the analysis report.
+
+
+
+Next, we use a Docker container image to make the computational environment for this project reproducible.
 
 To interactively run R Studio inside the `jialujin/dsci-310-group-6` Docker container, type the following in terminal, after navigating to the root of this project repository:
 
@@ -53,7 +74,9 @@ R version 4.1.1 with R packages:
     r-readxl=1.4.0 \
     r-digest=0.6.29 \
     r-kknn=1.3.1 \
-    r-here=1.0.1
+    r-here=1.0.1 \
+    r-devtools=2.4.3 \
+    r-datathexplorer=0.0.0.9000
 
 ## License Information
 
