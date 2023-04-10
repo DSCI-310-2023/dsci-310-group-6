@@ -16,6 +16,8 @@ library(repr)
 library(tidymodels)
 library(GGally)
 library(here)
+library(devtools)
+library(datatheexplorer)
 options(repr.matrix.max.rows = 10)
 
 set.seed(123)
@@ -61,7 +63,6 @@ knitr::kable(data_head, caption = "Preview of bike data")
 ```
 
 ```{r, echo = FALSE}
-source(here("../src/summary_data.R"))
 # find the range and median of the daily count
 max <- get_max(data, "cnt")
 min <- get_min(data, "cnt")
