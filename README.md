@@ -55,7 +55,7 @@ R version 4.1.1 with R packages:
     r-kknn=1.3.1 \
     r-here=1.0.1 \
     r-devtools=2.3.2 \
-    r-datatheexplorer=0.0.0.9000 
+    r-datatheexplorer=1.0.0
 
 ## License Information
 
